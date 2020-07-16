@@ -3,25 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Calculadora</title>
 </head>
-<body>
+<body style="background-color: #eeeeee;">
+
+    <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">PolishCalc</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">JavaScript</a></li>
+          </ul>
+        </div>
+    </nav>
 
     <main id="app">
-        <form @submit.prevent='descomposeOperation(operation)'>
-            <label>Normal:</label>
-            <input type="text" v-model='operation' autofocus>
-            <button>Posfija</button>
-        </form>
-    
-        <div id="response">
-            <p>La respuesta en posfijo es: {{ response }}</p>
-            <p>El resultado es: {{ result }}</p>
+        <div class="row container">
+            <h2>Calculadora de Infijo a Posfijo</h2>
+            <div class="col s12">
+              <div class="card">
+                <div class="card-content">
+                  <span class="card-title">Ingresar Notación Normal</span>
+                  
+                    <form @submit.prevent='descomposeOperation(operation)'>
+                        <label>Normal:</label>
+                        <input type="text" v-model='operation' ref='expresion'>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Evaluar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </form>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col s12">
+                <div class="card">
+                  <div class="card-content">
+                    <span class="card-title">Respuestas</span>
+                    <div id="response">
+                        <p>La respuesta en posfijo es: </p>
+                        <p>{{ response }}</p>
+                        <p>El resultado es: {{ result }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script type="module" src="/calc.js"></script>
     <script type="module" src="/main.js"></script>
 </body>
 </html>

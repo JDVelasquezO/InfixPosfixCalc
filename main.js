@@ -14,15 +14,16 @@ const vm = new Vue({
     },
     methods: {
         descomposeOperation(operation) {
-            let opeWithoutSpaces = operation.trim().split('');
+            let opeWithoutSpaces = operation.trim().split(' ');
             let newOpe = [];
             
+            console.log(opeWithoutSpaces);
+
             opeWithoutSpaces.forEach(element => {
                 if (element !== " ") {
                     newOpe.push(element);
                 }
             });
-
             this.orderPosfixed(newOpe);
         },
 
@@ -32,7 +33,7 @@ const vm = new Vue({
             let newExpresion = [];
 
             expresion.forEach(exp => {
-                if (exp in numbers) {
+                if (!isNaN(exp)) {
                     newExpresion.push(exp)
                 } else {
                     if (stackOperators.getLength() === 0) {
@@ -88,11 +89,11 @@ const vm = new Vue({
             let stackNumbers = new Stack();
 
             newExpresion.forEach(exp => {
-                if (exp in numbers) {
-                    stackNumbers.push(parseInt(exp))
+                if (!isNaN(exp)) {
+                    stackNumbers.push(parseFloat(exp))
                 } else {
-                    let value1 = parseInt(stackNumbers.pop());
-                    let value2 = parseInt(stackNumbers.pop());
+                    let value1 = parseFloat(stackNumbers.pop());
+                    let value2 = parseFloat(stackNumbers.pop());
                     let res = 0;
 
                     console.log(value1, value2);
@@ -127,5 +128,8 @@ const vm = new Vue({
 
             this.result = stackNumbers.pop();
         }
+    },
+    mounted() {
+        this.$refs.expresion.focus();
     }
 })
